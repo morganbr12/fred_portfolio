@@ -1,0 +1,243 @@
+/* ── Download button (screen only) ───────────────── */
+
+.cv-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  border-radius: 3rem;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: var(--transition-bounce);
+
+  &:hover {
+    transform: translateY(-3px) scale(1.04);
+    border-color: var(--primary);
+    background: rgba(139, 92, 246, 0.08);
+  }
+}
+
+/* ── CV doc hidden on screen ──────────────────────── */
+
+.cv-doc { display: none; }
+
+/* ══════════════════════════════════════════════════
+   PRINT STYLES
+   ══════════════════════════════════════════════════ */
+
+@media print {
+
+  /* Hide everything, show only cv-doc */
+  body.printing-cv * { visibility: hidden; }
+  body.printing-cv .cv-doc,
+  body.printing-cv .cv-doc * { visibility: visible; }
+  body.printing-cv .cv-doc {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+  }
+
+  /* ── Page ── */
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  /* ── Root doc ── */
+  .cv-doc {
+    display: block !important;
+    width: 210mm;
+    min-height: 297mm;
+    max-height: 297mm;
+    overflow: hidden;
+    background: #ffffff;
+    font-family: 'Calibri', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9pt;
+    line-height: 1.4;
+    color: #1a1a1a;
+    box-sizing: border-box;
+    padding: 8mm 12mm 8mm 12mm;
+  }
+
+  /* ── Name header ── */
+  .cv-name-header {
+    margin-bottom: 2mm;
+
+    h1 {
+      font-size: 26pt;
+      font-weight: 900;
+      letter-spacing: 1pt;
+      color: #1b2a4a;
+      margin: 0;
+      line-height: 1;
+      font-family: 'Calibri', 'Helvetica Neue', Arial, sans-serif;
+    }
+  }
+
+  /* ── Horizontal rule ── */
+  .cv-rule {
+    border: none;
+    border-top: 1.5pt solid #1b2a4a;
+    margin: 2mm 0 4mm;
+  }
+
+  /* ── Two-column layout ── */
+  .cv-columns {
+    display: flex;
+    gap: 7mm;
+    align-items: flex-start;
+  }
+
+  .cv-left  { flex: 0 0 118mm; }
+  .cv-right { flex: 1; }
+
+  /* ── Section ── */
+  .cv-sec {
+    margin-bottom: 4.5mm;
+  }
+
+  /* Section title — uppercase with left blue accent bar, exactly like the PDF */
+  .cv-sec__title {
+    font-size: 8pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6pt;
+    color: #1b2a4a;
+    margin: 0 0 2mm;
+    padding: 0.5mm 0 0.5mm 3mm;
+    border-left: 3pt solid #4a7fa8;
+    line-height: 1.2;
+  }
+
+  /* ── Professional Summary ── */
+  .cv-summary {
+    font-size: 8.5pt;
+    color: #2c2c2c;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ── Work History ── */
+  .cv-job {
+    margin-bottom: 3.5mm;
+    padding-bottom: 3mm;
+    border-bottom: 0.5pt solid #e8e8e8;
+
+    &:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+  }
+
+  .cv-job__top {
+    margin-bottom: 0.5mm;
+  }
+
+  .cv-job__role {
+    font-size: 8.5pt;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+
+  .cv-job__dates {
+    font-size: 8.5pt;
+    font-weight: 400;
+    color: #1a1a1a;
+  }
+
+  .cv-job__company {
+    font-size: 8.5pt;
+    font-weight: 700;
+    color: #1b2a4a;
+    margin: 0 0 1.5mm;
+  }
+
+  .cv-job__list {
+    margin: 0;
+    padding-left: 4mm;
+    list-style: disc;
+
+    li {
+      font-size: 8pt;
+      color: #2c2c2c;
+      line-height: 1.45;
+      margin-bottom: 0.8mm;
+
+      &::marker { color: #4a7fa8; }
+    }
+  }
+
+  /* ── Right column — Contact ── */
+  .cv-contact-line {
+    font-size: 8.5pt;
+    color: #2c2c2c;
+    margin: 0 0 1mm;
+
+    strong { color: #1a1a1a; }
+  }
+
+  /* ── Portfolios ── */
+  .cv-link-list {
+    margin: 0;
+    padding-left: 3.5mm;
+    list-style: disc;
+
+    li {
+      font-size: 8pt;
+      color: #1b2a4a;
+      line-height: 1.55;
+
+      &::marker { color: #4a7fa8; }
+    }
+  }
+
+  /* ── Education ── */
+  .cv-edu__degree {
+    font-size: 8.5pt;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 0.5mm;
+  }
+
+  .cv-edu__school {
+    font-size: 8pt;
+    color: #2c2c2c;
+    margin: 0 0 0.5mm;
+
+    strong { color: #1b2a4a; }
+  }
+
+  .cv-edu__year {
+    font-size: 7.5pt;
+    color: #666;
+    margin: 0;
+  }
+
+  /* ── Skills ── */
+  .cv-skills-list {
+    margin: 0;
+    padding-left: 3.5mm;
+    list-style: disc;
+
+    li {
+      font-size: 8pt;
+      color: #2c2c2c;
+      line-height: 1.5;
+      margin-bottom: 1mm;
+
+      &::marker { color: #4a7fa8; }
+
+      strong { color: #1a1a1a; }
+    }
+  }
+
+  /* ── Hide button when printing ── */
+  .cv-download-btn { display: none !important; }
+
+} /* end @media print */

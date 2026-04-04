@@ -1,0 +1,145 @@
+<!-- Trigger button — shown on screen, hidden when printing -->
+<button class="cv-download-btn" (click)="print()" aria-label="Download CV">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+    <polyline points="7 10 12 15 17 10"/>
+    <line x1="12" y1="15" x2="12" y2="3"/>
+  </svg>
+  Download CV
+</button>
+
+<!-- ═══════════════════════════════════════════
+     CV DOCUMENT  (hidden on screen, prints as PDF)
+     ═══════════════════════════════════════════ -->
+<div class="cv-doc" id="cv-doc">
+
+  <!-- ── Full-width name header ─────────────── -->
+  <header class="cv-name-header">
+    <h1>FREDRICK DANKWAH</h1>
+  </header>
+
+  <hr class="cv-rule">
+
+  <!-- ── Two-column body ────────────────────── -->
+  <div class="cv-columns">
+
+    <!-- ════ LEFT — Summary + Work History ════ -->
+    <div class="cv-left">
+
+      <!-- Professional Summary -->
+      <section class="cv-sec">
+        <h2 class="cv-sec__title">PROFESSIONAL SUMMARY</h2>
+        <p class="cv-summary">
+          Passionate Flutter &amp; Angular developer with 4+ years of experience building
+          scalable cross-platform mobile apps and enterprise web applications. Strong in
+          BLoC architecture, state management, reactive programming with RxJS, and CI/CD
+          automation. Committed to writing clean, maintainable code that ships fast and
+          performs beautifully across iOS, Android, and the web.
+        </p>
+      </section>
+
+      <!-- Work History -->
+      <section class="cv-sec">
+        <h2 class="cv-sec__title">WORK HISTORY</h2>
+
+        <!-- Job 1 -->
+        <div class="cv-job">
+          <div class="cv-job__top">
+            <span class="cv-job__role">Software Engineer II (Flutter &amp; Angular Developer),</span>
+            <span class="cv-job__dates"> Aug 2023 to Current</span>
+          </div>
+          <p class="cv-job__company">appsNmobile Solutions Ltd - Accra, Ghana (Hybrid)</p>
+          <ul class="cv-job__list">
+            <li>Spearheaded development of a cross-platform Flutter app achieving a 4.8-star rating with 50k+ downloads.</li>
+            <li>Architected BLoC-based state management, improving code maintainability by 60%.</li>
+            <li>Integrated CI/CD pipelines with GitHub Actions, reducing release time by 45%.</li>
+            <li>Developed and maintained multiple Angular web apps ensuring seamless integration with backend APIs.</li>
+          </ul>
+        </div>
+
+        <!-- Job 2 -->
+        <div class="cv-job">
+          <div class="cv-job__top">
+            <span class="cv-job__role">Mobile Developer,</span>
+            <span class="cv-job__dates"> Nov 2021 to July 2023</span>
+          </div>
+          <p class="cv-job__company">SolarTaxi Ltd - Accra, Ghana</p>
+          <ul class="cv-job__list">
+            <li>Led end-to-end development of a Flutter-based ride-hailing app, reaching 20k+ active users within the first year.</li>
+            <li>Implemented real-time location tracking, in-app payments, and push notifications.</li>
+            <li>Optimised app performance, reducing load times by 30% and improving user retention.</li>
+            <li>Collaborated with cross-functional teams to deliver high-quality releases on schedule.</li>
+          </ul>
+        </div>
+
+        <!-- Job 3 -->
+        <div class="cv-job">
+          <div class="cv-job__top">
+            <span class="cv-job__role">Freelance Flutter &amp; Angular Developer,</span>
+            <span class="cv-job__dates"> 2020 to 2021</span>
+          </div>
+          <p class="cv-job__company">Self-Employed - Remote</p>
+          <ul class="cv-job__list">
+            <li>Delivered 3+ client projects spanning mobile apps, dashboards, and landing pages.</li>
+            <li>Maintained a 5-star rating on Upwork with 100% job-success score.</li>
+            <li>Built an Angular admin panel used by a FinTech startup to manage its user base.</li>
+          </ul>
+        </div>
+      </section>
+
+    </div><!-- /cv-left -->
+
+    <!-- ════ RIGHT — Contact, Portfolios, Education, Skills ════ -->
+    <div class="cv-right">
+
+      <!-- Contact -->
+      <section class="cv-sec">
+        <h2 class="cv-sec__title">CONTACT</h2>
+        <p class="cv-contact-line"><strong>Phone:</strong> +233 (0) 000 000 000</p>
+        <p class="cv-contact-line"><strong>Email:</strong> f.morgan221&#64;outlook.com</p>
+        <p class="cv-contact-line"><strong>Location:</strong> Accra, Greater Accra</p>
+      </section>
+
+      <!-- Portfolios -->
+      <section class="cv-sec">
+        <h2 class="cv-sec__title">PORTFOLIOS</h2>
+        <ul class="cv-link-list">
+          <li>linkedin.com/in/fredrickdankwah</li>
+          <li>github.com/morganbr12</li>
+        </ul>
+      </section>
+
+      <!-- Education -->
+      <section class="cv-sec">
+        <h2 class="cv-sec__title">EDUCATION</h2>
+        <p class="cv-edu__degree">B.Sc. Computer Science</p>
+        <p class="cv-edu__school"><strong>University of Ghana</strong> - Accra, Ghana</p>
+        <p class="cv-edu__year">2016 – 2020</p>
+      </section>
+
+      <!-- Skills -->
+      <section class="cv-sec">
+        <h2 class="cv-sec__title">SKILLS</h2>
+        <ul class="cv-skills-list">
+          <li><strong>Mobile:</strong> Flutter, Dart, Kotlin, Java, BLoC, Provider</li>
+          <li><strong>Web:</strong> Angular, TypeScript, RxJS, HTML5, SCSS, Tailwind CSS</li>
+          <li><strong>Backend &amp; APIs:</strong> Firebase, Node.js, REST APIs, GraphQL</li>
+          <li><strong>Database:</strong> SQLite, PostgreSQL, Firestore</li>
+          <li><strong>DevOps &amp; Tools:</strong> Git, GitHub Actions, CI/CD, Docker, Postman, Jira</li>
+        </ul>
+      </section>
+
+      <!-- Languages -->
+      <section class="cv-sec">
+        <h2 class="cv-sec__title">LANGUAGES</h2>
+        <ul class="cv-skills-list">
+          <li><strong>English</strong> – Fluent</li>
+          <li><strong>Twi</strong> – Native</li>
+        </ul>
+      </section>
+
+    </div><!-- /cv-right -->
+
+  </div><!-- /cv-columns -->
+
+</div>
