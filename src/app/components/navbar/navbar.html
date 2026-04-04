@@ -1,0 +1,49 @@
+<nav class="navbar" [class.navbar--scrolled]="isScrolled()">
+  <div class="navbar__inner">
+    <!-- Logo -->
+    <button class="navbar__logo" (click)="scrollTo('hero')">
+      <span class="gradient-text">Fred.</span>
+    </button>
+
+    <!-- Desktop nav -->
+    <ul class="navbar__links">
+      @for (link of navLinks; track link.id) {
+        <li>
+          <button
+            class="navbar__link"
+            [class.navbar__link--active]="activeSection() === link.id"
+            (click)="scrollTo(link.id)"
+          >
+            {{ link.label }}
+          </button>
+        </li>
+      }
+    </ul>
+
+    <!-- CTA + hamburger -->
+    <div class="navbar__actions">
+      <button class="btn btn--primary btn--sm" (click)="scrollTo('contact')">
+        Hire Me
+      </button>
+      <button class="navbar__hamburger" (click)="toggleMenu()" [class.is-open]="menuOpen()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="navbar__mobile" [class.is-open]="menuOpen()">
+    @for (link of navLinks; track link.id) {
+      <button
+        class="navbar__mobile-link"
+        [class.is-active]="activeSection() === link.id"
+        (click)="scrollTo(link.id)"
+      >
+        {{ link.label }}
+      </button>
+    }
+    <button class="btn btn--primary" style="margin-top:1rem;width:100%" (click)="scrollTo('contact')">
+      Hire Me
+    </button>
+  </div>
+</nav>

@@ -1,0 +1,144 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1.2rem 2rem;
+  transition: all 0.3s ease;
+
+  &--scrolled {
+    background: rgba(10, 10, 18, 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 0.8rem 2rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  &__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  &__logo {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    padding: 0;
+    line-height: 1;
+
+    .gradient-text {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  &__links {
+    display: flex;
+    list-style: none;
+    gap: 0.25rem;
+
+    @media (max-width: 768px) { display: none; }
+  }
+
+  &__link {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-2);
+    font-size: 0.88rem;
+    font-weight: 500;
+    padding: 0.5rem 0.9rem;
+    border-radius: 0.5rem;
+    transition: color 0.2s, background 0.2s;
+    font-family: var(--font-body);
+
+    &:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    &--active {
+      color: var(--primary);
+      background: rgba(139, 92, 246, 0.1);
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+
+    @media (max-width: 768px) { display: flex; }
+
+    span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    &.is-open {
+      span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      span:nth-child(2) { opacity: 0; }
+      span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    }
+  }
+
+  &__mobile {
+    display: none;
+    flex-direction: column;
+    padding: 1rem 0 0.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+
+    @media (max-width: 768px) { display: flex; }
+
+    &.is-open { max-height: 400px; }
+  }
+
+  &__mobile-link {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-2);
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.8rem 0;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: color 0.2s;
+    font-family: var(--font-body);
+
+    &:hover, &.is-active { color: var(--primary); }
+  }
+
+  // Hide "Hire Me" on mobile in actions (only show in mobile menu)
+  .btn--sm {
+    @media (max-width: 768px) { display: none; }
+  }
+}

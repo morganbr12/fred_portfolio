@@ -1,0 +1,62 @@
+<section class="section experience" id="experience">
+  <div class="container">
+    <div class="section-header" scrollReveal>
+      <span class="section-tag">Career</span>
+      <h2>Work <span class="gradient-text">Experience</span></h2>
+      <p>A journey of building impactful products and growing as an engineer.</p>
+    </div>
+
+    <div class="timeline">
+      @for (exp of experiences; track exp.company; let i = $index) {
+        <div
+          class="timeline__item"
+          scrollReveal
+          [attr.data-delay]="(i % 3 + 1) * 100"
+          [style.--exp-color]="exp.color"
+        >
+          <!-- Connector dot -->
+          <div class="timeline__dot">
+            <div class="timeline__dot-inner"></div>
+          </div>
+
+          <!-- Card -->
+          <div class="timeline__card glass">
+            <div class="timeline__card-header">
+              <div class="timeline__info">
+                <h3 class="timeline__role">{{ exp.role }}</h3>
+                <div class="timeline__company">
+                  <span class="timeline__company-name">{{ exp.company }}</span>
+                  <span class="timeline__separator">·</span>
+                  <span class="timeline__location">{{ exp.location }}</span>
+                </div>
+              </div>
+              <div class="timeline__meta">
+                <span class="timeline__period" [style.color]="exp.color">{{ exp.period }}</span>
+                <span class="timeline__type">{{ exp.type }}</span>
+                @if (exp.current) {
+                  <span class="timeline__badge">Current</span>
+                }
+              </div>
+            </div>
+
+            <ul class="timeline__points">
+              @for (point of exp.points; track point) {
+                <li>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12l4 4L19 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  {{ point }}
+                </li>
+              }
+            </ul>
+
+            <div class="timeline__card-glow"></div>
+          </div>
+        </div>
+      }
+
+      <!-- Timeline line -->
+      <div class="timeline__line"></div>
+    </div>
+  </div>
+</section>

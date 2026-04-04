@@ -1,0 +1,305 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding-top: 5rem;
+
+  &__canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  /* ── Ambient blobs ── */
+  &__blobs { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: blob-pulse 12s ease-in-out infinite;
+
+    &--1 {
+      width: 480px; height: 480px;
+      background: rgba(139, 92, 246, 0.18);
+      top: -120px; right: -80px;
+      animation-delay: 0s;
+    }
+    &--2 {
+      width: 360px; height: 360px;
+      background: rgba(6, 182, 212, 0.14);
+      bottom: 0; left: -60px;
+      animation-delay: -4s;
+    }
+    &--3 {
+      width: 280px; height: 280px;
+      background: rgba(16, 185, 129, 0.12);
+      top: 40%; right: 30%;
+      animation-delay: -8s;
+    }
+  }
+
+  /* ── Content ── */
+  &__content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      text-align: center;
+    }
+  }
+
+  /* ── Text side ── */
+  &__text { animation: slide-up 0.8s ease both; }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--accent);
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__badge-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  &__greeting {
+    font-size: 1.1rem;
+    color: var(--text-2);
+    margin-bottom: 0.5rem;
+  }
+
+  &__name {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.25rem;
+    color: var(--text);
+
+    .gradient-text {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  &__role {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    font-weight: 500;
+    color: var(--text-2);
+    margin-bottom: 1.5rem;
+    min-height: 2rem;
+  }
+
+  &__role-typed {
+    color: var(--secondary);
+    font-weight: 600;
+  }
+
+  .cursor {
+    display: inline-block;
+    color: var(--primary);
+    animation: cursor-blink 1s step-end infinite;
+    font-weight: 300;
+    margin-left: 1px;
+  }
+
+  &__desc {
+    color: var(--text-2);
+    font-size: 1rem;
+    line-height: 1.8;
+    max-width: 500px;
+    margin-bottom: 2.5rem;
+
+    strong { color: var(--text); font-weight: 600; }
+
+    @media (max-width: 900px) { margin: 0 auto 2.5rem; }
+  }
+
+  &__cta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+
+    @media (max-width: 900px) { justify-content: center; }
+  }
+
+  &__socials {
+    display: flex;
+    gap: 0.75rem;
+
+    @media (max-width: 900px) { justify-content: center; }
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    color: var(--muted);
+    transition: all 0.25s ease;
+    backdrop-filter: blur(8px);
+
+    svg { width: 17px; height: 17px; }
+
+    &:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      background: rgba(139, 92, 246, 0.1);
+      transform: translateY(-3px);
+      box-shadow: 0 4px 16px rgba(139, 92, 246, 0.25);
+    }
+  }
+
+  /* ── Avatar side ── */
+  &__avatar-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: slide-up 0.8s 0.2s ease both;
+
+    @media (max-width: 900px) { order: -1; }
+  }
+
+  .avatar {
+    position: relative;
+    width: 320px; height: 320px;
+
+    @media (max-width: 500px) { width: 240px; height: 240px; }
+
+    &__orbit {
+      position: absolute;
+      inset: -30px;
+      border: 1px dashed rgba(139, 92, 246, 0.25);
+      border-radius: 50%;
+      animation: spin-slow 18s linear infinite;
+    }
+
+    &__ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--gradient);
+      padding: 3px;
+      animation: float 5s ease-in-out infinite, glow-pulse 4s ease-in-out infinite;
+    }
+
+    &__inner {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: var(--bg-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+
+      @media (max-width: 500px) { font-size: 2.5rem; }
+    }
+
+    .orbit-dot {
+      position: absolute;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      top: 50%; left: 0;
+      margin-top: -5px; margin-left: -5px;
+      transform-origin: calc(50% + (30px + 160px));
+
+      &--1 {
+        background: var(--primary);
+        box-shadow: 0 0 12px var(--primary);
+        transform: rotate(0deg) translateX(calc(160px + 30px));
+      }
+      &--2 {
+        background: var(--secondary);
+        box-shadow: 0 0 12px var(--secondary);
+        transform: rotate(180deg) translateX(calc(160px + 30px));
+      }
+    }
+  }
+
+  /* ── Floating tech pills ── */
+  .tech-pill {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.45rem 0.9rem;
+    border-radius: 2rem;
+    background: rgba(15, 15, 30, 0.85);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    color: var(--text);
+    white-space: nowrap;
+
+    &--1 { top: 5%; right: -15%; animation: float-x 6s ease-in-out infinite; }
+    &--2 { bottom: 10%; right: -20%; animation: float-x 7s 1s ease-in-out infinite; }
+    &--3 { top: 25%; left: -18%; animation: float-x 5.5s 0.5s ease-in-out infinite; }
+    &--4 { bottom: 20%; left: -10%; animation: float-x 6.5s 1.5s ease-in-out infinite; }
+
+    @media (max-width: 900px) {
+      &--1 { right: -5%; }
+      &--2 { right: -8%; }
+      &--3 { left: -5%; }
+      &--4 { left: 0%; }
+    }
+  }
+
+  /* ── Scroll indicator ── */
+  &__scroll {
+    position: absolute;
+    bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    span {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+  }
+
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--primary), transparent);
+    animation: shimmer 2s ease-in-out infinite;
+  }
+}

@@ -1,0 +1,69 @@
+<section class="section about" id="about">
+  <div class="container">
+    <div class="section-header" scrollReveal>
+      <span class="section-tag">About Me</span>
+      <h2>The Dev <span class="gradient-text">Behind the Code</span></h2>
+    </div>
+
+    <div class="about__layout">
+      <!-- Left: story + stats -->
+      <div class="about__story" scrollReveal>
+        <div class="about__avatar-small">
+          <div class="about__avatar-ring">
+            <div class="about__initials">FM</div>
+          </div>
+          <div class="about__status">
+            <span class="status-dot"></span>
+            Open to work
+          </div>
+        </div>
+
+        <h3 class="about__subtitle">Hi, I'm Fred 👋</h3>
+        <p class="about__bio">
+          I'm a passionate Flutter &amp; Angular developer with over 6 years of experience turning
+          complex problems into elegant digital products. My journey started with a curiosity about
+          how apps work — and it hasn't stopped since.
+        </p>
+        <p class="about__bio">
+          I thrive at the intersection of <strong>beautiful design</strong> and
+          <strong>solid engineering</strong>. Whether I'm architecting a real-time mobile app or
+          building a responsive enterprise dashboard, I bring the same energy: clean code,
+          thoughtful UX, and a relentless focus on performance.
+        </p>
+        <p class="about__bio">
+          When I'm not shipping features, I'm exploring new tech, contributing to open source,
+          or mentoring the next wave of developers.
+        </p>
+
+        <!-- Stats -->
+        <div class="about__stats">
+          @for (stat of stats; track stat.label) {
+            <div class="stat-card">
+              <span class="stat-card__value gradient-text">{{ stat.value }}</span>
+              <span class="stat-card__label">{{ stat.label }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Right: strength cards -->
+      <div class="about__strengths">
+        @for (s of strengths; track s.title; let i = $index) {
+          <div
+            class="strength-card"
+            scrollReveal
+            [attr.data-delay]="(i + 1) * 100"
+            [style.--s-color]="s.color"
+          >
+            <div class="strength-card__icon">{{ s.icon }}</div>
+            <div>
+              <h4 class="strength-card__title">{{ s.title }}</h4>
+              <p class="strength-card__desc">{{ s.desc }}</p>
+            </div>
+            <div class="strength-card__glow"></div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

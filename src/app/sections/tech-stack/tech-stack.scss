@@ -1,0 +1,96 @@
+.tech-stack {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%);
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+
+  @media (max-width: 1024px) { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 680px)  { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 400px)  { grid-template-columns: 1fr; }
+}
+
+.tech-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.1rem 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  cursor: default;
+  transition: transform 0.3s var(--transition-bounce), border-color 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: var(--tech-color, var(--primary));
+    box-shadow: 0 8px 32px color-mix(in srgb, var(--tech-color, var(--primary)) 30%, transparent);
+
+    .tech-card__glow { opacity: 1; }
+    .tech-card__icon { transform: scale(1.12) rotate(-5deg); }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: 44px; height: 44px;
+    border-radius: 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 800;
+    font-family: var(--font-display);
+    transition: transform 0.3s var(--transition-bounce);
+    letter-spacing: -0.05em;
+  }
+
+  &__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+  }
+
+  &__name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__desc {
+    font-size: 0.72rem;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__cat {
+    flex-shrink: 0;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--tech-color, var(--primary));
+    background: var(--tech-bg, rgba(139,92,246,0.12));
+    padding: 0.25rem 0.6rem;
+    border-radius: 1rem;
+  }
+
+  &__glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 100%, var(--tech-bg, rgba(139,92,246,0.15)) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+}

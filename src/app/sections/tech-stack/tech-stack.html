@@ -1,0 +1,31 @@
+<section class="section tech-stack" id="tech-stack">
+  <div class="container">
+    <div class="section-header" scrollReveal>
+      <span class="section-tag">What I Use</span>
+      <h2>My <span class="gradient-text">Tech Stack</span></h2>
+      <p>Technologies I work with daily to craft high-quality mobile and web experiences.</p>
+    </div>
+
+    <div class="tech-grid">
+      @for (tech of techs; track tech.name; let i = $index) {
+        <div
+          class="tech-card"
+          scrollReveal
+          [attr.data-delay]="((i % 4) + 1) * 100"
+          [style.--tech-color]="tech.color"
+          [style.--tech-bg]="tech.bg"
+        >
+          <div class="tech-card__icon" [style.background]="tech.bg" [style.color]="tech.color">
+            {{ tech.abbr }}
+          </div>
+          <div class="tech-card__info">
+            <span class="tech-card__name">{{ tech.name }}</span>
+            <span class="tech-card__desc">{{ tech.desc }}</span>
+          </div>
+          <span class="tech-card__cat">{{ tech.category }}</span>
+          <div class="tech-card__glow"></div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

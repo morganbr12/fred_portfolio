@@ -1,0 +1,187 @@
+.projects {
+  background: var(--bg);
+}
+
+/* ── Filters ─────────────────────────────────── */
+
+.projects__filters {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.6rem 1.4rem;
+  border-radius: 2rem;
+  border: 1.5px solid var(--glass-border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  &:hover {
+    color: var(--text);
+    border-color: rgba(255,255,255,0.2);
+  }
+
+  &--active {
+    background: var(--gradient);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+  }
+}
+
+/* ── Grid ────────────────────────────────────── */
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+
+  @media (max-width: 900px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 580px) { grid-template-columns: 1fr; }
+}
+
+/* ── Card ────────────────────────────────────── */
+
+.project-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s, box-shadow 0.3s;
+  transform-style: preserve-3d;
+  will-change: transform;
+  cursor: pointer;
+
+  &:hover {
+    border-color: rgba(139, 92, 246, 0.35);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(139, 92, 246, 0.12);
+
+    .project-card__image-overlay { opacity: 1; }
+    .project-card__glow { opacity: 1; }
+  }
+
+  &--featured {
+    grid-column: span 1;
+    border-color: rgba(139, 92, 246, 0.2);
+  }
+
+  /* Image */
+  &__image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+
+    .featured-badge {
+      position: absolute;
+      top: 0.75rem; left: 0.75rem;
+      z-index: 2;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      padding: 0.3rem 0.75rem;
+      border-radius: 2rem;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+  }
+
+  &__image-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 3;
+  }
+
+  /* Body */
+  &__body {
+    padding: 1.4rem 1.4rem 1.6rem;
+  }
+
+  &__meta {
+    margin-bottom: 0.6rem;
+  }
+
+  &__cat {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    padding: 0.25rem 0.65rem;
+    border-radius: 1rem;
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+
+  &__desc {
+    font-size: 0.85rem;
+    color: var(--text-2);
+    line-height: 1.7;
+    margin-bottom: 1.1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  /* Glow effect */
+  &__glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(139,92,246,0.08) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+}
+
+/* ── Tag pill ────────────────────────────────── */
+
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 1rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--text-2);
+  transition: background 0.2s;
+}
