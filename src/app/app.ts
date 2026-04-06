@@ -6,6 +6,7 @@ import { ProjectsSectionComponent } from './sections/projects/projects';
 import { ExperienceSectionComponent } from './sections/experience/experience';
 import { AboutSectionComponent } from './sections/about/about';
 import { ContactSectionComponent } from './sections/contact/contact';
+import { GithubActivityComponent } from './sections/github/github-activity';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ import { ContactSectionComponent } from './sections/contact/contact';
     ProjectsSectionComponent,
     ExperienceSectionComponent,
     AboutSectionComponent,
+    GithubActivityComponent,
     ContactSectionComponent,
   ],
   templateUrl: './app.html',

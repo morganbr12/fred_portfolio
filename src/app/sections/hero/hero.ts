@@ -9,7 +9,6 @@ import {
   signal,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { CvComponent } from '../../components/cv/cv';
 
 interface Particle {
   x: number; y: number;
@@ -20,7 +19,7 @@ interface Particle {
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CvComponent],
+  imports: [],
   templateUrl: './hero.html',
   styleUrl: './hero.scss',
 })

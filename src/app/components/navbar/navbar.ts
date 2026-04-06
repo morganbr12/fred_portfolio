@@ -18,6 +18,7 @@ export class NavbarComponent {
     { label: 'Home',       id: 'hero' },
     { label: 'Tech',       id: 'tech-stack' },
     { label: 'Projects',   id: 'projects' },
+    { label: 'GitHub',     id: 'github' },
     { label: 'Experience', id: 'experience' },
     { label: 'About',      id: 'about' },
     { label: 'Contact',    id: 'contact' },

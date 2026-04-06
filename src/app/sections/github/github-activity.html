@@ -1,0 +1,132 @@
+<section class="section github-section" id="github">
+  <div class="container">
+
+    <div class="section-header" scrollReveal>
+      <span class="section-tag">Live Activity</span>
+      <h2>GitHub <span class="gradient-text">Contributions</span></h2>
+      <p>Real-time commit activity pulled directly from GitHub — updates every 5 minutes.</p>
+    </div>
+
+    <!-- Stats row -->
+    @if (!loading() && !error()) {
+      <div class="gh-stats" scrollReveal data-delay="100">
+
+        @if (user$ | async; as user) {
+          <a class="gh-profile glass" href="https://github.com/morganbr12" target="_blank">
+            <img [src]="user.avatar_url" [alt]="user.login" class="gh-profile__avatar">
+            <div class="gh-profile__info">
+              <span class="gh-profile__name">{{ user.name || user.login }}</span>
+              <span class="gh-profile__handle">&#64;{{ user.login }}</span>
+            </div>
+            <svg class="gh-profile__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M7 17L17 7M17 7H7M17 7v10"/>
+            </svg>
+          </a>
+        }
+
+        <div class="gh-stat glass">
+          <span class="gh-stat__value gradient-text">{{ totalLastYear() }}</span>
+          <span class="gh-stat__label">Contributions<br>Last 12 months</span>
+        </div>
+        <div class="gh-stat glass">
+          <span class="gh-stat__value" [class.is-active]="todayCount() > 0">{{ todayCount() }}</span>
+          <span class="gh-stat__label">Commits<br>Today</span>
+        </div>
+        <div class="gh-stat glass">
+          <span class="gh-stat__value gradient-text">{{ currentStreak() }}</span>
+          <span class="gh-stat__label">Current<br>Streak (days)</span>
+        </div>
+        <div class="gh-stat glass">
+          <span class="gh-stat__value gradient-text">{{ longestStreak() }}</span>
+          <span class="gh-stat__label">Longest<br>Streak (days)</span>
+        </div>
+      </div>
+    }
+
+    <!-- Heatmap card -->
+    <div class="gh-card glass" scrollReveal data-delay="200">
+
+      @if (loading()) {
+        <div class="gh-loading">
+          <span class="gh-spinner"></span>
+          <span>Fetching GitHub activity…</span>
+        </div>
+      } @else if (error()) {
+        <div class="gh-error">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Could not load contribution data. Check back later.
+        </div>
+      } @else {
+        <div class="gh-heatmap-wrap">
+
+          <!-- Month labels -->
+          <div class="gh-months">
+            @for (m of monthLabels(); track m.label + m.col) {
+              <span class="gh-month" [style.grid-column]="m.col + 1">{{ m.label }}</span>
+            }
+          </div>
+
+          <!-- Grid -->
+          <div class="gh-grid">
+            <!-- Day-of-week labels -->
+            <div class="gh-day-labels">
+              @for (d of dayLabels; track $index) {
+                <span class="gh-day-label">{{ d }}</span>
+              }
+            </div>
+
+            <!-- Week columns -->
+            <div class="gh-weeks">
+              @for (week of weeks(); track $index; let wi = $index) {
+                <div class="gh-week">
+                  @for (day of week.days; track $index) {
+                    <div
+                      class="gh-cell"
+                      [class.gh-cell--empty]="!day"
+                      [class.gh-cell--today]="day?.date === today"
+                      [style.background]="day ? levelColor(day.level) : 'transparent'"
+                      [style.box-shadow]="day && day.count > 0 ? '0 0 6px ' + levelColor(day.level) + '80' : 'none'"
+                      (mouseenter)="showTooltip($event, day)"
+                      (mouseleave)="hideTooltip()"
+                    ></div>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- Legend -->
+          <div class="gh-legend">
+            <span class="gh-legend__label">Less</span>
+            <div class="gh-legend__cells">
+              @for (lvl of [0,1,2,3,4]; track lvl) {
+                <div class="gh-legend__cell" [style.background]="levelColor(lvl)"></div>
+              }
+            </div>
+            <span class="gh-legend__label">More</span>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Live indicator -->
+    @if (!loading() && !error()) {
+      <p class="gh-live-note" scrollReveal data-delay="300">
+        <span class="live-dot"></span>
+        Live — auto-refreshes every 5 minutes
+      </p>
+    }
+
+  </div>
+</section>
+
+<!-- Tooltip (fixed to cursor) -->
+@if (tooltip()) {
+  <div
+    class="gh-tooltip"
+    [style.left.px]="tooltipX() + 14"
+    [style.top.px]="tooltipY() - 36"
+  >{{ tooltip() }}</div>
+}
