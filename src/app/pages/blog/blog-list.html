@@ -1,0 +1,108 @@
+<div class="blog-page">
+
+  <!-- ── Page header ─────────────────────────── -->
+  <header class="blog-page__header">
+    <div class="container">
+      <a routerLink="/" class="blog-page__back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Back to Portfolio
+      </a>
+      <div class="blog-page__hero">
+        <span class="section-tag">The Blog</span>
+        <h1>Tech Articles &amp; <span class="gradient-text">Deep Dives</span></h1>
+        <p>Practical posts on Flutter, Angular, mobile architecture, and the tools I use every day.</p>
+      </div>
+
+      <!-- Search -->
+      <div class="blog-page__search-wrap">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input
+          type="text"
+          class="blog-page__search"
+          placeholder="Search articles…"
+          [value]="searchQuery()"
+          (input)="onSearch($event)"
+        >
+      </div>
+
+      <!-- Category filters -->
+      <div class="blog-page__cats">
+        @for (cat of categories(); track cat) {
+          <button
+            class="filter-btn"
+            [class.filter-btn--active]="activeCategory() === cat"
+            (click)="setCategory(cat)"
+          >{{ cat }}</button>
+        }
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Posts grid ──────────────────────────── -->
+  <main class="blog-page__body container">
+
+    @if (posts().length === 0) {
+      <div class="blog-page__empty">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <p>No posts match your search.</p>
+      </div>
+    } @else {
+      <!-- Featured post (first item) -->
+      @if (activeCategory() === 'All' && !searchQuery() && posts()[0]; as featured) {
+        <a class="bl-featured" [routerLink]="['/blog', featured.slug]">
+          <div class="bl-featured__cover" [style.background]="featured.cover"></div>
+          <div class="bl-featured__body">
+            <div class="bl-featured__meta">
+              <span class="bl-cat">{{ featured.category }}</span>
+              <span class="bl-meta-item">{{ formatDate(featured.date) }}</span>
+              <span class="bl-meta-sep">·</span>
+              <span class="bl-meta-item">{{ featured.readTime }} min read</span>
+            </div>
+            <h2 class="bl-featured__title">{{ featured.title }}</h2>
+            <p class="bl-featured__excerpt">{{ featured.excerpt }}</p>
+            <div class="bl-featured__tags">
+              @for (tag of featured.tags.slice(0, 4); track tag) {
+                <span class="tag">{{ tag }}</span>
+              }
+            </div>
+            <span class="btn btn--primary bl-featured__cta">
+              Read Article
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </a>
+      }
+
+      <!-- Remaining posts grid -->
+      <div class="bl-grid">
+        @for (post of (activeCategory() === 'All' && !searchQuery() ? posts().slice(1) : posts()); track post.slug; let i = $index) {
+          <a class="bl-card" [routerLink]="['/blog', post.slug]">
+            <div class="bl-card__cover" [style.background]="post.cover">
+              <span class="bl-cat">{{ post.category }}</span>
+            </div>
+            <div class="bl-card__body">
+              <div class="bl-card__meta">
+                <span class="bl-meta-item">{{ formatDate(post.date) }}</span>
+                <span class="bl-meta-sep">·</span>
+                <span class="bl-meta-item">{{ post.readTime }} min read</span>
+              </div>
+              <h3 class="bl-card__title">{{ post.title }}</h3>
+              <p class="bl-card__excerpt">{{ post.excerpt }}</p>
+              <div class="bl-card__tags">
+                @for (tag of post.tags.slice(0, 3); track tag) {
+                  <span class="tag">{{ tag }}</span>
+                }
+              </div>
+            </div>
+            <div class="bl-card__glow"></div>
+          </a>
+        }
+      </div>
+    }
+
+  </main>
+</div>

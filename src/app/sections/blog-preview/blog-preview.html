@@ -1,0 +1,92 @@
+<section class="section blog-preview" id="blog">
+  <div class="container">
+
+    <div class="section-header" scrollReveal>
+      <span class="section-tag">Latest Posts</span>
+      <h2>From the <span class="gradient-text">Blog</span></h2>
+      <p>Thoughts, tutorials, and deep dives on Flutter, Angular, and modern software engineering.</p>
+    </div>
+
+    <div class="bp-grid">
+      <!-- Featured card — left column -->
+      <a
+        class="bp-card bp-card--featured"
+        [routerLink]="['/blog', posts[0].slug]"
+        scrollReveal
+        data-delay="100"
+      >
+        <div class="bp-card__cover" [style.background]="posts[0].cover">
+          <span class="bp-card__cat">{{ posts[0].category }}</span>
+          <span class="bp-card__featured-badge">Featured</span>
+        </div>
+        <div class="bp-card__body">
+          <div class="bp-card__meta">
+            <span class="bp-card__date">{{ formatDate(posts[0].date) }}</span>
+            <span class="bp-card__dot">·</span>
+            <span class="bp-card__read">{{ posts[0].readTime }} min read</span>
+          </div>
+          <h3 class="bp-card__title">{{ posts[0].title }}</h3>
+          <p class="bp-card__excerpt">{{ posts[0].excerpt }}</p>
+          <div class="bp-card__tags">
+            @for (tag of posts[0].tags.slice(0, 3); track tag) {
+              <span class="tag">{{ tag }}</span>
+            }
+          </div>
+        </div>
+        <div class="bp-card__arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+          </svg>
+        </div>
+        <div class="bp-card__glow"></div>
+      </a>
+
+      <!-- Right column — 2 smaller cards stacked -->
+      <div class="bp-side">
+        @for (post of posts.slice(1); track post.slug; let i = $index) {
+          <a
+            class="bp-card bp-card--side"
+            [routerLink]="['/blog', post.slug]"
+            scrollReveal
+            [attr.data-delay]="(i + 2) * 100"
+          >
+            <div class="bp-card__cover" [style.background]="post.cover">
+              <span class="bp-card__cat">{{ post.category }}</span>
+            </div>
+            <div class="bp-card__body">
+              <div class="bp-card__meta">
+                <span class="bp-card__date">{{ formatDate(post.date) }}</span>
+                <span class="bp-card__dot">·</span>
+                <span class="bp-card__read">{{ post.readTime }} min read</span>
+              </div>
+              <h3 class="bp-card__title">{{ post.title }}</h3>
+              <p class="bp-card__excerpt">{{ post.excerpt }}</p>
+              <div class="bp-card__tags">
+                @for (tag of post.tags.slice(0, 3); track tag) {
+                  <span class="tag">{{ tag }}</span>
+                }
+              </div>
+            </div>
+            <div class="bp-card__arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+              </svg>
+            </div>
+            <div class="bp-card__glow"></div>
+          </a>
+        }
+      </div>
+    </div>
+
+    <!-- View all -->
+    <div class="bp-footer" scrollReveal data-delay="400">
+      <a routerLink="/blog" class="btn btn--outline bp-view-all">
+        View All Posts
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</section>
